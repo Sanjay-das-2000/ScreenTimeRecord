@@ -105,3 +105,43 @@ export const getUserById = async (id) => {
         }
     }
 }
+
+export const addAdmin = async (user) => {
+    try {
+        const obj = {
+            url: `${usersUrl}/addadmin`,
+            method: "POST",
+            data: user
+        };
+        const result = await axios(obj);
+        return {
+            status: true,
+            data: result.data
+        }
+    } catch (error) {
+        return {
+            success: false,
+            data: error
+        }
+    }
+}
+
+export const getAdmin = async (email) => {
+    try {
+        const obj = {
+            url: `${usersUrl}/getadmin`,
+            method: "POST",
+            data: email
+        };
+        const result = await axios(obj);
+        return {
+            status: true,
+            data: result.data
+        }
+    } catch (error) {
+        return {
+            success: false,
+            data: error
+        }
+    }
+}

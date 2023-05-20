@@ -5,9 +5,16 @@ import {
   FormLabel,
   Input,
   Select,
+  RadioGroup,
+  Stack,
+  Radio,
+  CheckboxGroup,
+  Checkbox,
+  Heading,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { addUser } from "../api/api";
+import FormData from "../data/FormData"
 
 const inititialValue = {
   name: "",
@@ -23,6 +30,7 @@ const inititialValue = {
   religion: "",
 };
 
+
 const Form = () => {
   const [user, setUser] = useState(inititialValue);
 
@@ -32,108 +40,131 @@ const Form = () => {
 
   const AdduserFunction = async (event) => {
     event.preventDefault();
+    // FormData.map((question, index) => {
+    //   if (question.type === "single") {
+    //     let res = document.getElementById(question.question);
+    //     console.log(res);
+    //   }
+    // });
     const result = await addUser(user);
     console.log(result);
-  }
+  };
 
   return (
     <>
-      <Box height={"100%"} backgroundColor={"blue.100"} >
-        <Box w={"60vw"} m={"auto"} pt="5%" pb={"5%"} backgroundColor={"white"} p={"4%"} borderRadius={"5px"} boxShadow={"0px 0px 8px 2px gray"}>
+      <Box height={"100%"} mt={"2%"}>
+        <Box
+          w={"60vw"}
+          m={"auto"}
+          pt="5%"
+          pb={"5%"}
+          backgroundColor={"white"}
+          p={"2% 4%"}
+          borderRadius={"5px"}
+          boxShadow={"0px 2px 8px 2px gray"}
+        >
+          <Heading textAlign={"center"} mb={"2%"}>Child Screen Time Survey</Heading>
+          <hr style={{borderColor: "gray"}}></hr>
+          <form onSubmit={AdduserFunction}>
+            <FormControl>
+              {FormData.map((question, idx) => {
+                if (question.type === "singleselect") {
+                  return (
+                    <>
+                      <Box mt="5">
+                        <FormLabel key={idx}>{question.question}</FormLabel>
+                        <Select
+                          variant="flushed"
+                          name={question.name}
+                          placeholder="Select"
+                          onChange={(e) => onValueChange(e)}
+                          borderColor="gray"
+                        >
+                          {question.options.map((option, index) => {
+                              return (
+                                <>
+                                  <option
+                                    key={index}
+                                    value={option}
+                                  >
+                                    {option}
+                                  </option>
+                                </>
+                              );
+                            })}
+                        </Select>
+                        {/* <RadioGroup id={question.question}>
+                          <Stack direction="column">
+                            {question.options.map((option, index) => {
+                              return (
+                                <>
+                                  <Radio
+                                    key={index}
+                                    name={question.question}
+                                    value={option}
+                                  >
+                                    {option}
+                                  </Radio>
+                                </>
+                              );
+                            })}
+                          </Stack>
+                        </RadioGroup> */}
+                      </Box>
+                    </>
+                  );
+                } else {
+                  return(
+                    <>
+                      <Box mt="5">
+                        <FormLabel >{question.question}</FormLabel>
+                          <Input
+                            variant='flushed'
+                            name={question.name}
+                            borderColor={"gray"}
+                            type={question.type}
+                            onChange={(e) => onValueChange(e)}
+                          />
+                      </Box>
+                    </>
+                  )
 
-        <form onSubmit={AdduserFunction}>
-        <FormControl >
-          <FormLabel>Name of child</FormLabel>
-          <Input
-          variant='flushed'
-            name="name"
-            borderColor={"gray"}
-            type={"text"}
-            onChange={(e) => onValueChange(e)}
-            ></Input>
-          <FormLabel>Age of child</FormLabel>
-          <Input
-            variant='flushed'
-            name="age"
-            borderColor={"gray"}
-            type={"number"}
-            onChange={(e) => onValueChange(e)}
-            ></Input>
-          <FormLabel>Date of Birth</FormLabel>
-          <Input
-            variant='flushed'
-            name="DOB"
-            borderColor={"gray"}
-            type="date"
-            onChange={(e) => onValueChange(e)}
-            ></Input>
-          <FormLabel>Place of Birth</FormLabel>
-          <Input
-            variant='flushed'
-            name="POB"
-            borderColor={"gray"}
-            type="text"
-            onChange={(e) => onValueChange(e)}
-            ></Input>
-          <FormLabel>Time of Birth</FormLabel>
-          <Input
-            variant='flushed'
-            name="TOB"
-            borderColor={"gray"}
-            type="time"
-            onChange={(e) => onValueChange(e)}
-            ></Input>
-          <FormLabel>Gestation</FormLabel>
-          <Select variant='flushed' name="gestation" placeholder="Select" onChange={(e) => onValueChange(e)} borderColor='gray'>
-            <option>Preterm (before 37 weeks)</option>
-            <option>Term (37-41 weeks)</option>
-            <option>Post-dated (more than 41 weeks)</option>
-          </Select>
-          <FormLabel>Mode of Delivery</FormLabel>
-          <Select variant='flushed' name="deliverymode" placeholder="Select" onChange={(e) => onValueChange(e)} borderColor='gray'>
-            <option>Normal</option>
-            <option>C-section</option>
-          </Select>
-          <FormLabel>Birth weight</FormLabel>
-          <Select variant='flushed' name="birthweight" placeholder="Select" onChange={(e) => onValueChange(e)} borderColor='gray'>
-            <option>Low birthweight (less than 2.5 kg)</option>
-            <option>Normal birthweight (2.5 -4.5 kg)</option>
-            <option>Big baby (4.5kg or more)</option>
-          </Select>
-          <FormLabel>Gender</FormLabel >
-          <Select variant='flushed' name="gender" placeholder="Select" onChange={(e) => onValueChange(e)} borderColor='gray'>
-            <option>Male</option>
-            <option>Female</option>
-          </Select>
-          <FormLabel>Family type</FormLabel >
-          <Select variant='flushed' name="familytype" placeholder="Select" onChange={(e) => onValueChange(e)} borderColor='gray'>
-            <option>Joint Nuclear</option>
-            <option>Single Parent</option>
-          </Select>
-          <FormLabel>Religion</FormLabel >
-          <Select variant='flushed' name="religion" placeholder="Select" onChange={(e) => onValueChange(e)} borderColor='gray'>
-            <option>Hinduism</option>
-            <option>Buddhism</option>
-            <option>Jainism</option>
-            <option>Sikhism</option>
-            <option>Islam</option>
-            <option>Christianity</option>
-            <option>Other</option>
-          </Select>
+                  // return (
+                  //   <>
+                  //     <Box mt="5">
+                  //       <FormLabel key={idx}>{question.question}</FormLabel>
+                  //       <CheckboxGroup>
+                  //         <Stack direction="column">
+                  //           {question.options.map((option, index) => {
+                  //             return (
+                  //               <>
+                  //                 <Checkbox key={index} value={option}>
+                  //                   {option}
+                  //                 </Checkbox>
+                  //               </>
+                  //             );
+                  //           })}
+                  //         </Stack>
+                  //       </CheckboxGroup>
+                  //     </Box>
+                  //   </>
+                  // );
+                }
+              })}
 
-          <Button
-            mt={"2%"}
-            colorScheme="blue"
-            variant="solid"
-            size={"md"}
-            type="submit"
-            w={"100%"}
-            >
-            Submit
-          </Button>
-        </FormControl>
-        </form>
-              </Box>
+              <Button
+                mt={"2%"}
+                colorScheme="blue"
+                variant="solid"
+                size={"md"}
+                type="submit"
+                w={"100%"}
+              >
+                Submit
+              </Button>
+            </FormControl>
+          </form>
+        </Box>
       </Box>
     </>
   );

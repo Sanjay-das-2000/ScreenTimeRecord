@@ -1,4 +1,5 @@
 const Child = require("../schemas/Schema")
+const Admin = require("../schemas/AdminSchema");
 
 // Get user status
 exports.getUserStatus = (request, response) => {
@@ -13,7 +14,9 @@ exports.getUserStatus = (request, response) => {
     .catch((error)=>{
         response.status(404).json({ message: error.message })
     })
-}//get all users
+}
+
+//get all users
 exports.getAllUsers = (request, response) => {
     console.log(request.body);
     Child.find({} )
@@ -78,5 +81,34 @@ exports.deleteUser = (request, response) => {
      })
 }
 
+///Admin functions //////
+
+// Save data of the admin in database
+exports.addAdmin = (request, response) => {
+    const session = request.body;
+
+    const newSession = new Admin(session);
+    console.log(newSession);
+    newSession.save()
+    .then((res) => {
+        console.log("data submitted");
+        return response.status(200).json(res);
+     })
+     .catch((error)=>{
+         response.status(404).json({ message: error.message })
+     })
+}
+
+// Get admin
+exports.getAdmin = (request, response) => {
+    Admin.findOne({ email: {$eq : request.body.email}} )
+    .then((res) => {
+        console.log(res);
+        return response.status(200).json(res);
+    })
+    .catch((error)=>{
+        response.status(404).json({ message: error.message })
+    })
+}
 
 
