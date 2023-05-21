@@ -54,7 +54,7 @@ const FormData = [
     {
       question: "Gender",
       name: "gender",
-      type: "sinsingleselectgle",
+      type: "singleselect",
       options: [
         "Male",
         "Female",
@@ -158,6 +158,228 @@ const FormData = [
         "Lower Middle",
         "Lower ",
       ],
+    },
+    {
+      question: "During Week Days, time spent by child in viewing electronic devices (time is per day):",
+      name: "weekdaytimespanviewingelectronics",
+      type: "singleselectmultirow",
+      subquestions: [
+        {
+          question: "TV viewing hours per day by the child",
+          name: "tvwatchingtime",
+        },
+        {
+          question: "Smartphone use by the child",
+          name: "smartphonewatchingtime",
+        },
+        {
+          question: "Laptop use by the child",
+          name: "laptopwatchingtime",
+        },
+        {
+          question: "Tablet use by the child",
+          name: "tabletwatchingtime",
+        },
+      ],
+      options: [
+        "No electronic device at home",
+        "<2 hours",
+        "2 to 4 hours",
+        "4 to 6 hours",
+        "6 to 8 hours",
+        "more than 8 hours"
+      ]
+    },
+    {
+      question: "During Week Ends, time spent by child in viewing electronic devices (time is per day):",
+      name: "weekendtimespanviewingelectronics",
+      type: "singleselectmultirow",
+      subquestions: [
+        {
+          question: "TV viewing hours per day by the child",
+          name: "tvwatchingtime",
+        },
+        {
+          question: "Smartphone use by the child",
+          name: "smartphonewatchingtime",
+        },
+        {
+          question: "Laptop use by the child",
+          name: "laptopwatchingtime",
+        },
+        {
+          question: "Tablet use by the child",
+          name: "tabletwatchingtime",
+        },
+      ],
+      options: [
+        "No electronic device at home",
+        "<2 hours",
+        "2 to 4 hours",
+        "4 to 6 hours",
+        "6 to 8 hours",
+        "more than 8 hours"
+      ]
+    },
+    {
+      question: "Purpose of Screen hours spend by the child during Week Days (time is per day):",
+      name: "purposeofviewscreenonweekdays",
+      type: "singleselectmultirow",
+      subquestions: [
+        {
+          question: "For education",
+          name: "foreducation",
+        },
+        {
+          question: "For entertainment",
+          name: "forentertainment",
+        },
+        {
+          question: "For playing games",
+          name: "forplayinggames",
+        },
+        {
+          question: "For social connect by the child (Video calls) by the child",
+          name: "videocalls",
+        },
+        {
+          question: "During meals by the child",
+          name: "duringeating",
+        },
+        {
+          question: "Just before bed time by the child",
+          name: "beforebed",
+        },
+        {
+          question: "For engaging the child (when you are busy)",
+          name: "toengage",
+        },
+      ],
+      options: [
+        "No electronic device at home",
+        "<2 hours",
+        "2-4 hours",
+        "4-6 hours",
+        "6-8 hours",
+        ">8 hours"
+      ]
+    },
+    {
+      question: "Purpose of Screen hours spend by the child during Week Ends (time is per day):",
+      name: "purposeofviewscreenonweekends",
+      type: "singleselectmultirow",
+      subquestions: [
+        {
+          question: "For education",
+          name: "foreducation",
+        },
+        {
+          question: "For entertainment",
+          name: "forentertainment",
+        },
+        {
+          question: "For playing games",
+          name: "forplayinggames",
+        },
+        {
+          question: "For social connect by the child (Video calls) by the child",
+          name: "invideocalls",
+        },
+        {
+          question: "During meals by the child",
+          name: "duringeating",
+        },
+        {
+          question: "Just before bed time by the child",
+          name: "beforebed",
+        },
+        {
+          question: "For engaging the child (when you are busy)",
+          name: "toengage",
+        },
+      ],
+      options: [
+        "No electronic device at home",
+        "<2 hours",
+        "2-4 hours",
+        "4-6 hours",
+        "6-8 hours",
+        ">8 hours"
+      ]
+    },
+    {
+      question: "Do you think children will eat better only if you feed them while watching the screen?",
+      name: "willchildreneatbetterwhilewatchinscreen",
+      type: "singleselect",
+      options: [
+        "Yes",
+        "No",
+        "Not sure",
+      ],
+    },
+    {
+      question: "Average Screen time of the Primary caretaker of the child (time is per day)",
+      name: "screentimeofprimarycaretaker",
+      type: "singleselect",
+      options: [
+        "No electronic device at home",
+        "<2 hours",
+        "2-4 hours",
+        "4-6 hours",
+        "6-8 hours",
+        ">8 hours"
+      ]
+    },
+    {
+      question: "What does the child watch among following programs per day during his or her screen time? (Specify hours of watching):",
+      name: "contentwatchedbyclild",
+      type: "singleselectmultirow",
+      subquestions: [
+        {
+          question: "Animated cartoons",
+          name: "cartoonswathingtime",
+        },
+        {
+          question: "Non-animated cartoons",
+          name: "nonanimetedcartoonswatchingtime",
+        },
+        {
+          question: "Movie (Animated)",
+          name: "animetedmoviewatchingtime",
+        },
+        {
+          question: "Movie (Non-animated)",
+          name: "nonanimatedmoviewatchingtime",
+        },
+        {
+          question: "Songs",
+          name: "songslisteningtime",
+        },
+        {
+          question: "Rhymes",
+          name: "rhymeslisteningtime",
+        },
+        {
+          question: "Knowledge based (News / web series/any more)",
+          name: "knowledgebasedcontentwatchingtime",
+        },
+        {
+          question: "Spiritual (bhajan)",
+          name: "spiritualwatchingtime",
+        },
+        {
+          question: "Serials",
+          name: "serialwatchingtime",
+        },
+      ],
+      options: [
+        "0 hours",
+        "<2 hours",
+        "2-4 hours",
+        "4-6 hours",
+        "6-8 hours",
+        ">8 hours"
+      ]
     },
     
     // {

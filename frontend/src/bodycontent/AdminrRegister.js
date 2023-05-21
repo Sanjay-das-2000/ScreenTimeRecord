@@ -34,7 +34,6 @@ export default function AdminrRegister() {
           email: email,
           password: hashedPassword,
         }
-        window.localStorage.setItem("login", JSON.stringify(values))
     
         try {
           const res = await getAdmin({ email: email });

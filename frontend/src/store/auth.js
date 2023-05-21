@@ -1,18 +1,28 @@
+
 import { createSlice } from "@reduxjs/toolkit";
 
-const AuthSlice = createSlice({
-    name: "authentication",
-    initialState: { isAuthenticated: false },
+let adminAuthInitials = {
+  isAdminAuthenticated: JSON.parse(localStorage.getItem("admin_details")) ? true : false,
+}
+
+const AdminAuthSlice = createSlice({
+    name: "adminauthentication",
+    initialState: adminAuthInitials,
     reducers: {
       login(state) {
-        state.isAuthenticated = true;
+        state.isAdminAuthenticated = true;
+        let obj = {
+          isAdminAuthenticated: true,
+        }
+        localStorage.setItem('admin_details', JSON.stringify(obj));
       },
       logout(state) {
-        state.isAuthenticated = false;
+        state.isAdminAuthenticated = false;
+        localStorage.removeItem('admin_details');
       },
     },
   });
 
-export const authActions = AuthSlice.actions;
+export const adminAuthActions = AdminAuthSlice.actions;
 
-export default AuthSlice.reducer
+export default AdminAuthSlice.reducer

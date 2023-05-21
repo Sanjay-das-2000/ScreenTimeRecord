@@ -1,11 +1,14 @@
-import React, { useRef } from "react";
+import React, { useRef, } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, Button, FormControl, FormLabel, Heading, Input } from "@chakra-ui/react";
 import { addAdmin, getAdmin } from "../api/api";
 import bcrypt from "bcryptjs"
+import { useDispatch } from "react-redux";
+import { adminAuthActions } from "../store/auth";
 
 export default function Loginpage() {
   let Navigate = useNavigate();
+  const Dispatch = useDispatch();
 
   const Email = useRef();
   const Password = useRef();
@@ -25,14 +28,11 @@ export default function Loginpage() {
             alert("Wrong password");
           }
           else{
+            Dispatch(adminAuthActions.login())
             alert("Login Successful")
             Navigate("/admin");
           }
         })
-        if(res.data.password === password){
-            alert("Login Successful")
-            Navigate("/admin");
-        }
       } else {
           alert("Admin not Found");
           // Email.current.value = null;
