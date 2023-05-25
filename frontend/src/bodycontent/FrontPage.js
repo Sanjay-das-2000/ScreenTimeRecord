@@ -1,14 +1,14 @@
 import React from "react";
-
 import { Box, Button, Flex, Heading, Image, Text } from "@chakra-ui/react";
 
 import kidsimage from "../media/FrontPageImage1.png";
+import Graph from "./Graph";
 
 export default function FrontPage() {
   return (
     <>
       <Box>
-        <Flex ml={"3%"} mr={"3%"} justify={"space-around"} mt={"5%"}>
+        <Flex m={"6% 3%"}  justify={"space-around"} >
           <Box width={"45vw"} mt={"4%"}>
             <Flex direction={"column"} justify={"center"}>
               <Heading fontSize={"3.5rem"}>SCREEN TIME </Heading>
@@ -43,6 +43,7 @@ export default function FrontPage() {
             <Image src={kidsimage} w={"45vw"}></Image>
           </Box>
         </Flex>
+        <Graph />
       </Box>
     </>
   );

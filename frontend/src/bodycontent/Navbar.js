@@ -21,11 +21,11 @@ export default function Navbar() {
     Navigate("/home");
   };
   const formHandler = () => {
-    setValue(true);
+    setValue(!value);
     Navigate("/servey");
   };
   const homeHandler = () => {
-    setValue(false);
+    setValue(!value);
     Navigate("/home");
   };
   const logoutHandler = () => {
@@ -33,6 +33,7 @@ export default function Navbar() {
     Navigate("/home");
   };
   const dashbordHandler = () => {
+    setValue(false);
     Navigate("/admin");
   };
   return (
@@ -55,7 +56,7 @@ export default function Navbar() {
           Tezpur University
         </Heading>
         <Flex align={"center"}>
-          {!isAdminAuth && !value && (
+          {!isAdminAuth && value && (
             <Button
               mr={"5%"}
               w={"10vw"}
@@ -69,7 +70,7 @@ export default function Navbar() {
               Servey
             </Button>
           )}
-          {!isAdminAuth && value && (
+          {!value && (
             <Button
               mr={"5%"}
               w={"10vw"}
@@ -83,7 +84,7 @@ export default function Navbar() {
               Home
             </Button>
           )}
-          {isAdminAuth && (
+          {isAdminAuth && value && (
             <Button
               mr={"5%"}
               w={"10vw"}

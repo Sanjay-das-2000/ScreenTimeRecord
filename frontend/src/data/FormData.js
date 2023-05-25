@@ -21,7 +21,7 @@ const FormData = [
   },
   {
     question: "Time of Birth",
-    name: "name",
+    name: "TOB",
     type: "time",
   },
   
@@ -154,9 +154,9 @@ const FormData = [
       options: [
         "Upper",
         "Upper Middle",
-        "Upper Lower ",
+        "Upper Lower",
         "Lower Middle",
-        "Lower ",
+        "Lower",
       ],
     },
     {
@@ -307,29 +307,7 @@ const FormData = [
         ">8 hours"
       ]
     },
-    {
-      question: "Do you think children will eat better only if you feed them while watching the screen?",
-      name: "willchildreneatbetterwhilewatchinscreen",
-      type: "singleselect",
-      options: [
-        "Yes",
-        "No",
-        "Not sure",
-      ],
-    },
-    {
-      question: "Average Screen time of the Primary caretaker of the child (time is per day)",
-      name: "screentimeofprimarycaretaker",
-      type: "singleselect",
-      options: [
-        "No electronic device at home",
-        "<2 hours",
-        "2-4 hours",
-        "4-6 hours",
-        "6-8 hours",
-        ">8 hours"
-      ]
-    },
+   
     {
       question: "What does the child watch among following programs per day during his or her screen time? (Specify hours of watching):",
       name: "contentwatchedbyclild",
@@ -374,6 +352,29 @@ const FormData = [
       ],
       options: [
         "0 hours",
+        "<2 hours",
+        "2-4 hours",
+        "4-6 hours",
+        "6-8 hours",
+        ">8 hours"
+      ]
+    },
+    {
+      question: "Do you think children will eat better only if you feed them while watching the screen?",
+      name: "willchildreneatbetterwhilewatchinscreen",
+      type: "singleselect",
+      options: [
+        "Yes",
+        "No",
+        "Not sure",
+      ],
+    },
+    {
+      question: "Average Screen time of the Primary caretaker of the child (time is per day)",
+      name: "screentimeofprimarycaretaker",
+      type: "singleselect",
+      options: [
+        "No electronic device at home",
         "<2 hours",
         "2-4 hours",
         "4-6 hours",
