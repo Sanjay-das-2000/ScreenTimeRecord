@@ -12,8 +12,10 @@ const Schema = mongoose.Schema({
   gender: String,
   familytype: String,
   religion: String,
-  educationqualificationoffather: String,
-  educationqualificationofmother: String,
+  educationqualificationofparent: {
+    father: String,
+    mother: String,
+  },
   totalchildren: String,
   noofhelpingstaff: String,
   ageofhelpingstaff: String,

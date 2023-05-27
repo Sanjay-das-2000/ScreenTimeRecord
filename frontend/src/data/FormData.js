@@ -65,7 +65,8 @@ const FormData = [
       name: "familytype",
       type: "singleselect",
       options: [
-        "Joint Neuclear",
+        "Joint",
+        "Neuclear",
         "Single Parent",
       ],
     },
@@ -84,9 +85,19 @@ const FormData = [
       ],
     },
     {
-      question: "Educational Qualification of Father",
-      name: "educationqualificationoffather",
-      type: "singleselect",
+      question: "Educational Qualification of Parent",
+      name: "educationqualificationofparent",
+      type: "singleselectmultirow",
+      subquestions: [
+        {
+          question: "Father",
+          name: "father"
+        },
+        {
+          question: "Mother",
+          name: "mother"
+        },
+      ],
       options: [
         "Below secondary",
         "Secondary",
@@ -97,20 +108,6 @@ const FormData = [
         "Doctorate"
       ],
     },
-    {
-      question: "Educational Qualification of Mother",
-      name: "educationqualificationofmother",
-      type: "singleselect",
-      options: [
-        "Below secondary",
-        "Secondary",
-        "Higher secondary",
-        "Diploma",
-        "Graduate",
-        "Postgraduate",
-        "Doctorate"
-      ],
-    }, 
     {
       question: "Total children in house",
       name: "totalchildren",
@@ -183,6 +180,7 @@ const FormData = [
       ],
       options: [
         "No electronic device at home",
+        "0 hours",
         "<2 hours",
         "2 to 4 hours",
         "4 to 6 hours",
@@ -214,6 +212,7 @@ const FormData = [
       ],
       options: [
         "No electronic device at home",
+        "0 hours",
         "<2 hours",
         "2 to 4 hours",
         "4 to 6 hours",
@@ -257,10 +256,11 @@ const FormData = [
       ],
       options: [
         "No electronic device at home",
+        "0 hours",
         "<2 hours",
-        "2-4 hours",
-        "4-6 hours",
-        "6-8 hours",
+        "2 to 4 hours",
+        "4 to 6 hours",
+        "6 to 8 hours",
         ">8 hours"
       ]
     },
@@ -299,11 +299,11 @@ const FormData = [
         },
       ],
       options: [
-        "No electronic device at home",
+        "0 hours",
         "<2 hours",
-        "2-4 hours",
-        "4-6 hours",
-        "6-8 hours",
+        "2 to 4 hours",
+        "4 to 6 hours",
+        "6 to 8 hours",
         ">8 hours"
       ]
     },
@@ -353,9 +353,9 @@ const FormData = [
       options: [
         "0 hours",
         "<2 hours",
-        "2-4 hours",
-        "4-6 hours",
-        "6-8 hours",
+        "2 to 4 hours",
+        "4 to 6 hours",
+        "6 to 8 hours",
         ">8 hours"
       ]
     },
@@ -375,10 +375,11 @@ const FormData = [
       type: "singleselect",
       options: [
         "No electronic device at home",
+        "0 hours",
         "<2 hours",
-        "2-4 hours",
-        "4-6 hours",
-        "6-8 hours",
+        "2 to 4 hours",
+        "4 to 6 hours",
+        "6 to 8 hours",
         ">8 hours"
       ]
     },

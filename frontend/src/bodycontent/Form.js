@@ -89,6 +89,9 @@ const Form = () => {
   const onValueChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
+  const onValueChange0 = (e) => {
+    setUser({ ...user, educationqualificationofparent :{ ...user.educationqualificationofparent, [e.target.name]: e.target.value }});
+  };
   const onValueChange1 = (e) => {
     setUser({ ...user, weekdaytimespanviewingelectronics :{ ...user.weekdaytimespanviewingelectronics, [e.target.name]: e.target.value }});
   };
@@ -171,6 +174,26 @@ const Form = () => {
                         return (
                           <Box mt={"4"}>
                             <FormLabel>{option.question}</FormLabel>
+                            {(question.name === "educationqualificationofparent") &&
+                            <Select
+                              variant="flushed"
+                              name={option.name}
+                              placeholder="Select"
+                              
+                              onChange={(e) => onValueChange0(e)}
+                              borderColor="gray"
+                            >
+                              {question.options.map((option, index) => {
+                                return (
+                                  <>
+                                    <option key={index} value={option}>
+                                      {option}
+                                    </option>
+                                  </>
+                                );
+                              })}
+                            </Select>
+                            }
                             {(question.name === "weekdaytimespanviewingelectronics") &&
                             <Select
                               variant="flushed"

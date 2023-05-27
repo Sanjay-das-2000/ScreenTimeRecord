@@ -1,4 +1,4 @@
-import { Button, Flex, Heading, Image } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Image, Text, VStack } from "@chakra-ui/react";
 import React, { useState } from "react";
 import image from "../media/Tezpur_University.png";
 import { useNavigate } from "react-router";
@@ -7,11 +7,9 @@ import { adminAuthActions } from "../store/auth";
 
 export default function Navbar() {
   const Dispatch = useDispatch();
-  const isAdminAuth = useSelector(
-    (state) => state.auth.isAdminAuthenticated
-  );
+  const isAdminAuth = useSelector((state) => state.auth.isAdminAuthenticated);
   console.log(isAdminAuth);
-  const [value, setValue] = useState(false);
+  const [value, setValue] = useState(true);
 
   const Navigate = useNavigate();
   const loginHandler = () => {
@@ -42,19 +40,23 @@ export default function Navbar() {
         justify={"space-between"}
         ml={"3%"}
         mr={"3%"}
-        h={"15vh"}
+        h={"20vh"}
         align={"center"}
         backgroundColor={"white"}
       >
-        <Image src={image} w={"4vw"}></Image>
-        <Heading
-          onClick={clickHandler}
-          cursor={"pointer"}
-          position={"relative"}
-          left={"5%"}
-        >
-          Tezpur University
-        </Heading>
+        <Image src={image} w={"6vw"}></Image>
+        <VStack w={"40vw"} position={"relative"} left={"4%"}>
+          <Heading
+            onClick={clickHandler}
+            cursor={"pointer"}
+            fontSize={"2.8rem"}
+          >
+            Tezpur University
+          </Heading>
+          <Text  fontSize={"1.4rem"} color={"#318FB5"}>
+            <strong>Center for Bioinformatics and Computational Biology</strong>
+          </Text>
+        </VStack>
         <Flex align={"center"}>
           {!isAdminAuth && value && (
             <Button
@@ -99,16 +101,18 @@ export default function Navbar() {
             </Button>
           )}
 
-          {!isAdminAuth && <Button
-            w={"10vw"}
-            backgroundColor={"black"}
-            color={"white"}
-            _hover={{ bg: "#45526C" }}
-            borderRadius={"30px"}
-            onClick={loginHandler}
-          >
-            Admin Log In
-          </Button>}
+          {!isAdminAuth && (
+            <Button
+              w={"10vw"}
+              backgroundColor={"black"}
+              color={"white"}
+              _hover={{ bg: "#45526C" }}
+              borderRadius={"30px"}
+              onClick={loginHandler}
+            >
+              Admin Log In
+            </Button>
+          )}
           {isAdminAuth && (
             <Button
               w={"10vw"}

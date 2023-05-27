@@ -1,86 +1,49 @@
 import React, { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
-import { getAllUsers } from "../api/api";
-import { Box, Heading } from "@chakra-ui/react";
+import { getAllUsers } from "../../api/api";
+import { Box, Heading, Select } from "@chakra-ui/react";
 
-let initialweekend = {
-  Upper: {
+let setinitialweekend = () => {
+  return{
+  "Male": {
     "<2 hours": 0,
     "2 to 4 hours": 0,
     "4 to 6 hours": 0,
     "6 to 8 hours": 0,
     "more than 8 hours": 0,
   },
-  "Upper Middle": {
+  "Female": {
     "<2 hours": 0,
     "2 to 4 hours": 0,
     "4 to 6 hours": 0,
     "6 to 8 hours": 0,
     "more than 8 hours": 0,
   },
-  "Upper Lower": {
-    "<2 hours": 0,
-    "2 to 4 hours": 0,
-    "4 to 6 hours": 0,
-    "6 to 8 hours": 0,
-    "more than 8 hours": 0,
-  },
-  "Lower Middle": {
-    "<2 hours": 0,
-    "2 to 4 hours": 0,
-    "4 to 6 hours": 0,
-    "6 to 8 hours": 0,
-    "more than 8 hours": 0,
-  },
-  Lower: {
-    "<2 hours": 0,
-    "2 to 4 hours": 0,
-    "4 to 6 hours": 0,
-    "6 to 8 hours": 0,
-    "more than 8 hours": 0,
-  },
+}
 };
-let initialweekday = {
-  Upper: {
+let setinitialweekday = () => {
+  return{
+  "Male": {
     "<2 hours": 0,
     "2 to 4 hours": 0,
     "4 to 6 hours": 0,
     "6 to 8 hours": 0,
     "more than 8 hours": 0,
   },
-  "Upper Middle": {
+  "Female": {
     "<2 hours": 0,
     "2 to 4 hours": 0,
     "4 to 6 hours": 0,
     "6 to 8 hours": 0,
     "more than 8 hours": 0,
   },
-  "Upper Lower": {
-    "<2 hours": 0,
-    "2 to 4 hours": 0,
-    "4 to 6 hours": 0,
-    "6 to 8 hours": 0,
-    "more than 8 hours": 0,
-  },
-  "Lower Middle": {
-    "<2 hours": 0,
-    "2 to 4 hours": 0,
-    "4 to 6 hours": 0,
-    "6 to 8 hours": 0,
-    "more than 8 hours": 0,
-  },
-  Lower: {
-    "<2 hours": 0,
-    "2 to 4 hours": 0,
-    "4 to 6 hours": 0,
-    "6 to 8 hours": 0,
-    "more than 8 hours": 0,
-  },
+}
 };
 
-export default function Graph() {
-  const [weekday, setWeekday] = useState(initialweekday);
-  const [weekend, setWeekend] = useState(initialweekend);
+export default function GraphSmartphoneWatchingTimebasedonGender() {
+  const [selectValue, setSelectValue] = useState("tvwatchingtime");
+  const [weekday, setWeekday] = useState(setinitialweekday());
+  const [weekend, setWeekend] = useState(setinitialweekend());
 
   useEffect(() => {
     const getuserFunction = async () => {
@@ -91,18 +54,18 @@ export default function Graph() {
       let updatedWeekend = { ...weekend };
 
       result.forEach((user) => {
-        updatedWeekday[user.class] = {
-          ...updatedWeekday[user.class],
-          [user.weekdaytimespanviewingelectronics.smartphonewatchingtime]:
-            updatedWeekday[user.class][
-              user.weekdaytimespanviewingelectronics.smartphonewatchingtime
+        updatedWeekday[user.gender] = {
+          ...updatedWeekday[user.gender],
+          [user.weekdaytimespanviewingelectronics[`${selectValue}`]]:
+            updatedWeekday[user.gender][
+              user.weekdaytimespanviewingelectronics[`${selectValue}`]
             ] + 1,
         };
-        updatedWeekend[user.class] = {
-          ...updatedWeekend[user.class],
-          [user.weekendtimespanviewingelectronics.smartphonewatchingtime]:
-            updatedWeekend[user.class][
-              user.weekendtimespanviewingelectronics.smartphonewatchingtime
+        updatedWeekend[user.gender] = {
+          ...updatedWeekend[user.gender],
+          [user.weekendtimespanviewingelectronics[`${selectValue}`]]:
+            updatedWeekend[user.gender][
+              user.weekendtimespanviewingelectronics[`${selectValue}`]
             ] + 1,
         };
       });
@@ -111,8 +74,7 @@ export default function Graph() {
       setWeekend(updatedWeekend);
     };
     getuserFunction();
-  }, []);
-  console.log(weekday);
+  }, [selectValue]);
 
   const options = {
     chart: {
@@ -131,29 +93,21 @@ export default function Graph() {
 
   const series = [
     {
-      name: "Upper",
+      name: "Male",
       data: [],
     },
     {
-      name: "Upper Middle",
-      data: [],
-    },
-    {
-      name: "Upper Lower",
+      name: "Female",
       data: [],
     },
   ];
   const series2 = [
     {
-      name: "Upper",
+      name: "Male",
       data: [],
     },
     {
-      name: "Upper Middle",
-      data: [],
-    },
-    {
-      name: "Upper Lower",
+      name: "Female",
       data: [],
     },
   ];
@@ -169,8 +123,29 @@ export default function Graph() {
     });
   });
 
+  const onValueChange = (e) => {
+    setSelectValue(e.target.value);
+    setWeekday(setinitialweekday());
+    setWeekend(setinitialweekend());
+  };
+
   return (
     <div>
+      <Box w={"25vw"} ml={"7%"} mt={"2%"}>
+          <Select
+            variant="filled"
+            onChange={(e) => onValueChange(e)}
+            borderColor="gray"
+            size='lg'
+            borderRadius={"30px"}
+            fontWeight={"medium"}
+          >
+            <option value={"tvwatchingtime"}>TV viewing hours per day by the child</option>
+            <option value={"smartphonewatchingtime"}>Smartphone use by the child</option>
+            <option value={"laptopwatchingtime"}>FLaptop use by the child</option>
+            <option value={"tabletwatchingtime"}>Tablet use by the child</option>
+          </Select>
+        </Box>
       <Box display={"flex"} justifyContent={"space-around"} p={"4%"}>
         <Box>
           <Heading fontSize={"1.4rem"} mb={"8%"}>
