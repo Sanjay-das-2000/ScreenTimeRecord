@@ -1,50 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
 import { getAllUsers } from "../../api/api";
-import { Box, Heading, Select } from "@chakra-ui/react";
+import { Box, Heading, Select, VStack } from "@chakra-ui/react";
 
-const setinitialweekend = () => {
-  return{
-  Upper: {
-    "<2 hours": 0,
-    "2 to 4 hours": 0,
-    "4 to 6 hours": 0,
-    "6 to 8 hours": 0,
-    "more than 8 hours": 0,
-  },
-  "Upper Middle": {
-    "<2 hours": 0,
-    "2 to 4 hours": 0,
-    "4 to 6 hours": 0,
-    "6 to 8 hours": 0,
-    "more than 8 hours": 0,
-  },
-  "Upper Lower": {
-    "<2 hours": 0,
-    "2 to 4 hours": 0,
-    "4 to 6 hours": 0,
-    "6 to 8 hours": 0,
-    "more than 8 hours": 0,
-  },
-  "Lower Middle": {
-    "<2 hours": 0,
-    "2 to 4 hours": 0,
-    "4 to 6 hours": 0,
-    "6 to 8 hours": 0,
-    "more than 8 hours": 0,
-  },
-  Lower: {
-    "<2 hours": 0,
-    "2 to 4 hours": 0,
-    "4 to 6 hours": 0,
-    "6 to 8 hours": 0,
-    "more than 8 hours": 0,
-  },
-}
-};
 const setinitialweekday = () => {
   return{
   Upper: {
+    count: 0,
+    "0 hours":0,
     "<2 hours": 0,
     "2 to 4 hours": 0,
     "4 to 6 hours": 0,
@@ -52,6 +15,8 @@ const setinitialweekday = () => {
     "more than 8 hours": 0,
   },
   "Upper Middle": {
+    count: 0,
+    "0 hours":0,
     "<2 hours": 0,
     "2 to 4 hours": 0,
     "4 to 6 hours": 0,
@@ -59,6 +24,8 @@ const setinitialweekday = () => {
     "more than 8 hours": 0,
   },
   "Upper Lower": {
+    count: 0,
+    "0 hours":0,
     "<2 hours": 0,
     "2 to 4 hours": 0,
     "4 to 6 hours": 0,
@@ -66,6 +33,8 @@ const setinitialweekday = () => {
     "more than 8 hours": 0,
   },
   "Lower Middle": {
+    count: 0,
+    "0 hours":0,
     "<2 hours": 0,
     "2 to 4 hours": 0,
     "4 to 6 hours": 0,
@@ -73,6 +42,8 @@ const setinitialweekday = () => {
     "more than 8 hours": 0,
   },
   Lower: {
+    count: 0,
+    "0 hours":0,
     "<2 hours": 0,
     "2 to 4 hours": 0,
     "4 to 6 hours": 0,
@@ -86,7 +57,6 @@ export default function GraphContentWatchonScreenBasedonSocioeconomicClass() {
   const [selectValue, setSelectValue] = useState("cartoonswathingtime");
 
   const [weekday, setWeekday] = useState(setinitialweekday());
-  const [weekend, setWeekend] = useState(setinitialweekend());
 
   useEffect(() => {
     const getuserFunction = async () => {
@@ -94,27 +64,18 @@ export default function GraphContentWatchonScreenBasedonSocioeconomicClass() {
       result = result.data;
 
       let updatedWeekday = { ...weekday };
-      let updatedWeekend = { ...weekend };
 
       result.forEach((user) => {
         updatedWeekday[user.class] = {
           ...updatedWeekday[user.class],
-          [user.purposeofviewscreenonweekdays[`${selectValue}`]]:
+          [user.contentwatchedbyclild[`${selectValue}`]]:
             updatedWeekday[user.class][
-              user.purposeofviewscreenonweekdays[`${selectValue}`]
-            ] + 1,
-        };
-        updatedWeekend[user.class] = {
-          ...updatedWeekend[user.class],
-          [user.purposeofviewscreenonweekends[`${selectValue}`]]:
-            updatedWeekend[user.class][
-              user.purposeofviewscreenonweekends[`${selectValue}`]
+              user.contentwatchedbyclild[`${selectValue}`]
             ] + 1,
         };
       });
 
       setWeekday(updatedWeekday);
-      setWeekend(updatedWeekend);
     };
     getuserFunction();
   }, [selectValue]);
@@ -148,39 +109,36 @@ export default function GraphContentWatchonScreenBasedonSocioeconomicClass() {
       name: "Upper Lower",
       data: [],
     },
-  ];
-  const series2 = [
     {
-      name: "Upper",
+      name: "Lower Middle",
       data: [],
     },
     {
-      name: "Upper Middle",
-      data: [],
-    },
-    {
-      name: "Upper Lower",
+      name: "Lower",
       data: [],
     },
   ];
 
+
   series.map((item) => {
     Object.entries(weekday[item.name]).map(([key, value]) => {
-      item.data.push(value);
+      if(key !== "count"){
+        weekday[item.name].count = weekday[item.name].count + value;
+      }
     });
   });
-  series2.map((item) => {
-    Object.entries(weekend[item.name]).map(([key, value]) => {
-      item.data.push(value);
+
+  series.map((item) => {
+    Object.entries(weekday[item.name]).map(([key, value]) => {
+      if(key !== "count"){
+      item.data.push((value/weekday[item.name].count).toFixed(2));
+      }
     });
   });
-  console.log(series);
-  console.log(series2);
 
   const onValueChange = (e) => {
     setSelectValue(e.target.value);
     setWeekday(setinitialweekday());
-    setWeekend(setinitialweekend());
   };
 
   return (
@@ -205,20 +163,14 @@ export default function GraphContentWatchonScreenBasedonSocioeconomicClass() {
             <option value={"serialwatchingtime"}>Serials</option>
           </Select>
         </Box>
-      <Box display={"flex"} justifyContent={"space-around"} p={"4%"}>
-        <Box>
-          <Heading fontSize={"1.4rem"} mb={"8%"}>
-            Weekday content watching time on screen
+      <VStack p={"4%"}>
+        <Box mb={"4%"}>
+          <Heading fontSize={"1.4rem"} mb={"4%"}>
+            Content watching time on screen
           </Heading>
-          <Chart options={options} series={series} type="bar" width="600" />
+          <Chart options={options} series={series} type="bar" width="1100" height="500" />
         </Box>
-        <Box>
-          <Heading fontSize={"1.4rem"} mb={"8%"}>
-            Weekend content watching time on screen
-          </Heading>
-          <Chart options={options} series={series2} type="bar" width="600" />
-        </Box>
-      </Box>
+      </VStack>
     </div>
   );
 }

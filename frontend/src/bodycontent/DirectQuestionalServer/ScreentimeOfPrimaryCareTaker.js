@@ -4,12 +4,15 @@ import Chart from "react-apexcharts";
 import { getAllUsers } from "../../api/api";
 
 let initialValue = {
-    "Single child": 0,
-        "2 children": 0,
-        "3 children ": 0,
-        "more than equal to 3 children": 0,
+    "No electronic device at home": 0,
+        "0 hours": 0,
+        "<2 hours": 0,
+        "2 to 4 hours": 0,
+        "4 to 6 hours": 0,
+        "6 to 8 hours": 0,
+        ">8 hours": 0
 };
-export default function TotalChildreninHouse() {
+export default function ScreentimeOfPrimaryCareTaker() {
   const [Value, setValue] = useState(initialValue);
   let count = 0;
   useEffect(() => {
@@ -22,7 +25,7 @@ export default function TotalChildreninHouse() {
       result.forEach((user) => {
         updateValue = {
             ...updateValue,
-            [user.totalchildren] : updateValue[user.totalchildren] + 1
+            [user.screentimeofprimarycaretaker] : updateValue[user.screentimeofprimarycaretaker] + 1
         }
       });
 
@@ -32,21 +35,24 @@ export default function TotalChildreninHouse() {
   }, []);
   const options = {
     chart: {
-      id: "Total Children",
+      id: "Caretaker screen time",
     },
     xaxis: {
       categories: [
-        "Single child",
-        "2 children",
-        "3 children ",
-        "more than equal to 3 children",
+        "No electronic device at home",
+        "0 hours",
+        "<2 hours",
+        "2 to 4 hours",
+        "4 to 6 hours",
+        "6 to 8 hours",
+        ">8 hours"
       ],
     },
   };
 
   const series = [
     {
-      name: "Total Children",
+      name: "Caretaker screen time",
       data: [],
     },
   ];
@@ -65,7 +71,7 @@ export default function TotalChildreninHouse() {
     <div>
       <Box>
         <Heading fontSize={"1.4rem"} mb={"4%"}>
-            Total children distribution based on data received
+            Primary CareTaker screen time distribution based on data received
         </Heading>
         <Chart options={options} series={series} type="bar" width="600" />
       </Box>

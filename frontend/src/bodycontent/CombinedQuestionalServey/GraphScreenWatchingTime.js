@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
 import { getAllUsers } from "../../api/api";
-import { Box, Heading, Select } from "@chakra-ui/react";
+import { Box, Heading, Select, VStack } from "@chakra-ui/react";
 
-let setinitialweekend = () => {
+const setinitialweekend = () => {
   return{
   Upper: {
+    count: 0,
+    "No electronic device at home":0,
+    "0 hours":0,
     "<2 hours": 0,
     "2 to 4 hours": 0,
     "4 to 6 hours": 0,
@@ -13,6 +16,9 @@ let setinitialweekend = () => {
     "more than 8 hours": 0,
   },
   "Upper Middle": {
+    count: 0,
+    "No electronic device at home":0,
+    "0 hours":0,
     "<2 hours": 0,
     "2 to 4 hours": 0,
     "4 to 6 hours": 0,
@@ -20,6 +26,9 @@ let setinitialweekend = () => {
     "more than 8 hours": 0,
   },
   "Upper Lower": {
+    count: 0,
+        "No electronic device at home":0,
+    "0 hours":0,
     "<2 hours": 0,
     "2 to 4 hours": 0,
     "4 to 6 hours": 0,
@@ -27,6 +36,9 @@ let setinitialweekend = () => {
     "more than 8 hours": 0,
   },
   "Lower Middle": {
+    count: 0,
+        "No electronic device at home":0,
+    "0 hours":0,
     "<2 hours": 0,
     "2 to 4 hours": 0,
     "4 to 6 hours": 0,
@@ -34,6 +46,9 @@ let setinitialweekend = () => {
     "more than 8 hours": 0,
   },
   Lower: {
+    count: 0,
+        "No electronic device at home":0,
+    "0 hours":0,
     "<2 hours": 0,
     "2 to 4 hours": 0,
     "4 to 6 hours": 0,
@@ -42,9 +57,12 @@ let setinitialweekend = () => {
   },
 }
 };
-let setinitialweekday = () => {
+const setinitialweekday = () => {
   return{
   Upper: {
+    count: 0,
+        "No electronic device at home":0,
+    "0 hours":0,
     "<2 hours": 0,
     "2 to 4 hours": 0,
     "4 to 6 hours": 0,
@@ -52,6 +70,9 @@ let setinitialweekday = () => {
     "more than 8 hours": 0,
   },
   "Upper Middle": {
+    count: 0,
+        "No electronic device at home":0,
+    "0 hours":0,
     "<2 hours": 0,
     "2 to 4 hours": 0,
     "4 to 6 hours": 0,
@@ -59,6 +80,9 @@ let setinitialweekday = () => {
     "more than 8 hours": 0,
   },
   "Upper Lower": {
+    count: 0,
+        "No electronic device at home":0,
+    "0 hours":0,
     "<2 hours": 0,
     "2 to 4 hours": 0,
     "4 to 6 hours": 0,
@@ -66,6 +90,9 @@ let setinitialweekday = () => {
     "more than 8 hours": 0,
   },
   "Lower Middle": {
+    count: 0,
+        "No electronic device at home":0,
+    "0 hours":0,
     "<2 hours": 0,
     "2 to 4 hours": 0,
     "4 to 6 hours": 0,
@@ -73,6 +100,9 @@ let setinitialweekday = () => {
     "more than 8 hours": 0,
   },
   Lower: {
+    count: 0,
+        "No electronic device at home":0,
+    "0 hours":0,
     "<2 hours": 0,
     "2 to 4 hours": 0,
     "4 to 6 hours": 0,
@@ -81,12 +111,12 @@ let setinitialweekday = () => {
   },
 }
 };
-
 export default function Graph() {
   const [selectValue, setSelectValue] = useState("tvwatchingtime");
 
   const [weekday, setWeekday] = useState(setinitialweekday());
   const [weekend, setWeekend] = useState(setinitialweekend());
+
 
   useEffect(() => {
     const getuserFunction = async () => {
@@ -121,10 +151,12 @@ export default function Graph() {
 
   const options = {
     chart: {
-      id: "Smartphone Watching time",
+      id: "Screen Watching time",
     },
     xaxis: {
       categories: [
+        "No electronic device at home",
+        "0 hours",
         "<2 hours",
         "2 to 4 hours",
         "4 to 6 hours",
@@ -147,6 +179,14 @@ export default function Graph() {
       name: "Upper Lower",
       data: [],
     },
+    {
+      name: "Lower Middle",
+      data: [],
+    },
+    {
+      name: "Lower",
+      data: [],
+    },
   ];
   const series2 = [
     {
@@ -161,16 +201,42 @@ export default function Graph() {
       name: "Upper Lower",
       data: [],
     },
+    {
+      name: "Lower Middle",
+      data: [],
+    },
+    {
+      name: "Lower",
+      data: [],
+    },
   ];
 
   series.map((item) => {
     Object.entries(weekday[item.name]).map(([key, value]) => {
-      item.data.push(value);
+      if(key !== "count"){
+        weekday[item.name].count = weekday[item.name].count + value;
+      }
     });
   });
   series2.map((item) => {
     Object.entries(weekend[item.name]).map(([key, value]) => {
-      item.data.push(value);
+      if(key !== "count"){
+        weekend[item.name].count = weekend[item.name].count + value;
+      }    });
+  });
+
+  series.map((item) => {
+    Object.entries(weekday[item.name]).map(([key, value]) => {
+      if(key !== "count"){
+      item.data.push((value/(weekday[item.name].count)).toFixed(2));
+      }
+    });
+  });
+  series2.map((item) => {
+    Object.entries(weekend[item.name]).map(([key, value]) => {
+      if(key !== "count"){
+      item.data.push((value/(weekend[item.name].count)).toFixed(2));
+      }
     });
   });
 
@@ -197,20 +263,20 @@ export default function Graph() {
             <option value={"tabletwatchingtime"}>Tablet use by the child</option>
           </Select>
         </Box>
-      <Box display={"flex"} justifyContent={"space-around"} p={"4%"}>
-        <Box>
+      <VStack p={"4%"}>
+        <Box mb={"4%"}>
           <Heading fontSize={"1.4rem"} mb={"8%"}>
-            Weekday smartphone watching time
+            Weekday screen watching time
           </Heading>
-          <Chart options={options} series={series} type="bar" width="600" />
+          <Chart options={options} series={series} type="bar" width="1100" height="500" />
         </Box>
         <Box>
           <Heading fontSize={"1.4rem"} mb={"8%"}>
-            Weekend smartphone watching time
+            Weekend screen watching time
           </Heading>
-          <Chart options={options} series={series2} type="bar" width="600" />
+          <Chart options={options} series={series2} type="bar" width="1100" height="500" />
         </Box>
-      </Box>
+      </VStack>
     </div>
   );
 }

@@ -4,12 +4,13 @@ import Chart from "react-apexcharts";
 import { getAllUsers } from "../../api/api";
 
 let initialValue = {
-    "Single child": 0,
-        "2 children": 0,
-        "3 children ": 0,
-        "more than equal to 3 children": 0,
+    "Upper": 0,
+        "Upper Middle": 0,
+        "Upper Lower": 0,
+        "Lower Middle": 0,
+        "Lower": 0,
 };
-export default function TotalChildreninHouse() {
+export default function SubeconomicClass() {
   const [Value, setValue] = useState(initialValue);
   let count = 0;
   useEffect(() => {
@@ -22,7 +23,7 @@ export default function TotalChildreninHouse() {
       result.forEach((user) => {
         updateValue = {
             ...updateValue,
-            [user.totalchildren] : updateValue[user.totalchildren] + 1
+            [user.class] : updateValue[user.class] + 1
         }
       });
 
@@ -32,21 +33,22 @@ export default function TotalChildreninHouse() {
   }, []);
   const options = {
     chart: {
-      id: "Total Children",
+      id: "Subeconomic Class",
     },
     xaxis: {
       categories: [
-        "Single child",
-        "2 children",
-        "3 children ",
-        "more than equal to 3 children",
+        "Upper",
+        "Upper Middle",
+        "Upper Lower",
+        "Lower Middle",
+        "Lower",
       ],
     },
   };
 
   const series = [
     {
-      name: "Total Children",
+      name: "Subeconomic Class",
       data: [],
     },
   ];
@@ -65,7 +67,7 @@ export default function TotalChildreninHouse() {
     <div>
       <Box>
         <Heading fontSize={"1.4rem"} mb={"4%"}>
-            Total children distribution based on data received
+            Subeconomic class distribution based on data received
         </Heading>
         <Chart options={options} series={series} type="bar" width="600" />
       </Box>

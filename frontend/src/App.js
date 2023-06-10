@@ -6,6 +6,9 @@ import AdminPage from "./bodycontent/AdminPage";
 import Form from "./bodycontent/Form";
 import Navbar from "./bodycontent/Navbar";
 import { useSelector } from "react-redux";
+import Graphs from "./bodycontent/Graphs";
+import Team from "./bodycontent/Team";
+import AboutUs from "./bodycontent/AboutUs";
 function App() {
   const isAdminAuth = useSelector((state)=> state.auth.isAdminAuthenticated);
   return (
@@ -17,7 +20,10 @@ function App() {
       <Route path="/login" element={<Loginpage />} />
       <Route path="/adminregister" element={<AdminrRegister />} />
       {isAdminAuth && <Route path="/admin" element={<AdminPage />} />}
-      <Route path="/servey" element={<Form />} />
+      <Route path="/survey" element={<Form />} />
+      <Route path="/team" element={<Team />} />
+      <Route path="/aboutus" element={<AboutUs />} />
+      <Route path="/surveyresult" element={<Graphs />}/>
     </Routes>
     </>
   );

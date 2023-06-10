@@ -123,7 +123,7 @@ const Form = () => {
 
   return (
     <>
-      <Box height={"100%"} mt={"2%"}>
+      <Box height={"100%"} mt={"2%"} mb={"3%"}>
         <Box
           w={"60vw"}
           m={"auto"}
@@ -134,10 +134,10 @@ const Form = () => {
           borderRadius={"5px"}
           boxShadow={"0px 2px 8px 2px gray"}
         >
-          <Heading textAlign={"center"} mb={"2%"}>
+          <Heading textAlign={"center"} >
             Child Screen Time Survey
           </Heading>
-          <hr style={{ borderColor: "gray" }}></hr>
+          <hr style={{ borderColor: "gray",borderWidth: "2px" , width: "28vw", margin:"auto" }}></hr>
           <form onSubmit={AdduserFunction}>
             <FormControl>
               {FormData.map((question, idx) => {

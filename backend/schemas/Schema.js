@@ -66,6 +66,14 @@ const Schema = mongoose.Schema({
     spiritualwatchingtime: String,
     serialwatchingtime: String,
   },
+  outdoorphysicalactivity: String,
+  isiteasytomanagechildwithscreen: String,
+  communicationskillincreased: String,
+  slowdownchildspeechandlanguagedevelopment: String,
+  increasesocialskills: String,
+  attentionprobleminchild: String,
+  restrictscreentime: String,
+  ownershipofelectronics: String,
 });
 
 const Child = mongoose.model("child", Schema);

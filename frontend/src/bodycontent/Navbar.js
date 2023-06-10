@@ -1,4 +1,13 @@
-import { Box, Button, Flex, Heading, Image, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  HStack,
+  Heading,
+  Image,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import React, { useState } from "react";
 import image from "../media/Tezpur_University.png";
 import { useNavigate } from "react-router";
@@ -9,21 +18,24 @@ export default function Navbar() {
   const Dispatch = useDispatch();
   const isAdminAuth = useSelector((state) => state.auth.isAdminAuthenticated);
   console.log(isAdminAuth);
-  const [value, setValue] = useState(true);
+  const [value, setValue] = useState(false);
 
   const Navigate = useNavigate();
+
   const loginHandler = () => {
+    setValue(true)
     Navigate("/login");
   };
-  const clickHandler = () => {
-    Navigate("/home");
+  const teamHandler = () => {
+    Navigate("/team");
+  };
+  const aboutusHandler = () => {
+    Navigate("/aboutus");
   };
   const formHandler = () => {
-    setValue(!value);
-    Navigate("/servey");
+    Navigate("/survey");
   };
   const homeHandler = () => {
-    setValue(!value);
     Navigate("/home");
   };
   const logoutHandler = () => {
@@ -31,82 +43,84 @@ export default function Navbar() {
     Navigate("/home");
   };
   const dashbordHandler = () => {
-    setValue(false);
     Navigate("/admin");
   };
   return (
     <div>
       <Flex
         justify={"space-between"}
-        ml={"3%"}
-        mr={"3%"}
-        h={"20vh"}
+        pl={"3%"}
+        pr={"3%"}
+        h={"18vh"}
         align={"center"}
-        backgroundColor={"white"}
       >
-        <Image src={image} w={"6vw"}></Image>
-        <VStack w={"40vw"} position={"relative"} left={"4%"}>
-          <Heading
-            onClick={clickHandler}
-            cursor={"pointer"}
-            fontSize={"2.8rem"}
-          >
-            Tezpur University
+        <Flex>
+
+        <Image
+          cursor={"pointer"}
+          onClick={homeHandler}
+          src={image}
+          w={"5.5vw"}
+          ></Image>
+        <Flex direction={"column"} ml={"15px"}>
+          <Heading fontSize={"2.5rem"}>Tezpur University</Heading>
+          <Heading fontSize={"1.3rem"} color={"#318FB5"} textAlign={"center"}>
+            Center for Bioinformatics and Computational Biology
           </Heading>
-          <Text  fontSize={"1.4rem"} color={"#318FB5"}>
-            <strong>Center for Bioinformatics and Computational Biology</strong>
-          </Text>
-        </VStack>
+        </Flex>
+          </Flex>
         <Flex align={"center"}>
-          {!isAdminAuth && value && (
-            <Button
+            <Text
               mr={"5%"}
-              w={"10vw"}
-              colorScheme="black"
-              variant="outline"
-              borderRadius={"30px"}
-              border="2px"
-              _hover={{ bg: "#ECECEC" }}
+              fontWeight={"bold"}
+              fontSize={"1.2rem"}
+              _hover={{ color: "gray" }}
+              cursor={"pointer"}
               onClick={formHandler}
             >
-              Servey
-            </Button>
-          )}
-          {!value && (
-            <Button
+              Survey
+            </Text>
+          <Text
+              fontWeight={"bold"}
               mr={"5%"}
-              w={"10vw"}
-              colorScheme="black"
-              variant="outline"
-              borderRadius={"30px"}
-              border="2px"
-              _hover={{ bg: "#ECECEC" }}
-              onClick={homeHandler}
+              fontSize={"1.2rem"}
+              cursor={"pointer"}
+              _hover={{ color: "gray" }}
+              onClick={teamHandler}
+              >
+            Team
+          </Text>
+          <Text
+            mr={"5%"}
+            w={"9vw"}
+            fontWeight={"bold"}
+            fontSize={"1.2rem"}
+            cursor={"pointer"}
+            _hover={{ color: "gray" }}
+            onClick={aboutusHandler}
             >
-              Home
-            </Button>
-          )}
+            About Us
+          </Text>
+
           {isAdminAuth && value && (
-            <Button
+            <Text
+              fontWeight={"bold"}
               mr={"5%"}
-              w={"10vw"}
-              colorScheme="black"
-              variant="outline"
-              borderRadius={"30px"}
-              border="2px"
-              _hover={{ bg: "#ECECEC" }}
+              fontSize={"1.2rem"}
+              cursor={"pointer"}
+              _hover={{ color: "gray" }}
               onClick={dashbordHandler}
             >
-              Dashbord
-            </Button>
+              Dashboard
+            </Text>
           )}
-
           {!isAdminAuth && (
             <Button
               w={"10vw"}
-              backgroundColor={"black"}
-              color={"white"}
-              _hover={{ bg: "#45526C" }}
+              variant={"outline"}
+              borderWidth={"2px"}
+              borderColor={"black"}
+              _hover={{ borderColor: "gray", color:"gray" }}
               borderRadius={"30px"}
               onClick={loginHandler}
             >
@@ -115,10 +129,11 @@ export default function Navbar() {
           )}
           {isAdminAuth && (
             <Button
-              w={"10vw"}
-              backgroundColor={"black"}
-              color={"white"}
-              _hover={{ bg: "#45526C" }}
+              w={"11vw"}
+              variant={"outline"}
+              borderWidth={"2px"}
+              borderColor={"black"}
+              _hover={{ borderColor: "gray", color:"gray" }}
               borderRadius={"30px"}
               onClick={logoutHandler}
             >

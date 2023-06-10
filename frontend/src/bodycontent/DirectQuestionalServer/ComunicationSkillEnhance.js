@@ -4,12 +4,11 @@ import Chart from "react-apexcharts";
 import { getAllUsers } from "../../api/api";
 
 let initialValue = {
-    "Single child": 0,
-        "2 children": 0,
-        "3 children ": 0,
-        "more than equal to 3 children": 0,
+    "Yes": 0,
+        "No": 0,
+        "Not sure": 0,
 };
-export default function TotalChildreninHouse() {
+export default function ComunicationSkillEnhance() {
   const [Value, setValue] = useState(initialValue);
   let count = 0;
   useEffect(() => {
@@ -22,7 +21,7 @@ export default function TotalChildreninHouse() {
       result.forEach((user) => {
         updateValue = {
             ...updateValue,
-            [user.totalchildren] : updateValue[user.totalchildren] + 1
+            [user.communicationskillincreased] : updateValue[user.communicationskillincreased] + 1
         }
       });
 
@@ -32,21 +31,20 @@ export default function TotalChildreninHouse() {
   }, []);
   const options = {
     chart: {
-      id: "Total Children",
+      id: "Communication skill management",
     },
     xaxis: {
       categories: [
-        "Single child",
-        "2 children",
-        "3 children ",
-        "more than equal to 3 children",
+        "Yes",
+        "No",
+        "Not sure",
       ],
     },
   };
 
   const series = [
     {
-      name: "Total Children",
+      name: "Communication skill management",
       data: [],
     },
   ];
@@ -65,7 +63,7 @@ export default function TotalChildreninHouse() {
     <div>
       <Box>
         <Heading fontSize={"1.4rem"} mb={"4%"}>
-            Total children distribution based on data received
+        Does child's communication skills will enhance watching screen distribution
         </Heading>
         <Chart options={options} series={series} type="bar" width="600" />
       </Box>

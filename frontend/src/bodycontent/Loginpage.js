@@ -45,7 +45,7 @@ export default function Loginpage() {
   return (
     <>
       <div>
-        <Box width={"40vw"} m="auto" boxShadow={"0px 0px 7px 3px gray"} p={"3%"} borderRadius={"12px"} mt="8%">
+        <Box width={"40vw"} m="auto" boxShadow={"0px 0px 7px 3px gray"} p={"3%"} borderRadius={"12px"} mt="5%">
             <Heading textAlign={"center"} mb={"3%"}>Welcome Admin</Heading>
           <form onSubmit={submitHandler}>
             <FormControl>

@@ -4,12 +4,11 @@ import Chart from "react-apexcharts";
 import { getAllUsers } from "../../api/api";
 
 let initialValue = {
-    "Single child": 0,
-        "2 children": 0,
-        "3 children ": 0,
-        "more than equal to 3 children": 0,
+  Yes: 0,
+  No: 0,
+  "Not sure": 0,
 };
-export default function TotalChildreninHouse() {
+export default function OwnershipOfElectronics() {
   const [Value, setValue] = useState(initialValue);
   let count = 0;
   useEffect(() => {
@@ -17,13 +16,14 @@ export default function TotalChildreninHouse() {
       let result = await getAllUsers();
       result = result.data;
 
-      let updateValue = {...Value}
+      let updateValue = { ...Value };
 
       result.forEach((user) => {
         updateValue = {
-            ...updateValue,
-            [user.totalchildren] : updateValue[user.totalchildren] + 1
-        }
+          ...updateValue,
+          [user.ownershipofelectronics]:
+            updateValue[user.ownershipofelectronics] + 1,
+        };
       });
 
       setValue(updateValue);
@@ -32,21 +32,16 @@ export default function TotalChildreninHouse() {
   }, []);
   const options = {
     chart: {
-      id: "Total Children",
+      id: "Ownership of electronics",
     },
     xaxis: {
-      categories: [
-        "Single child",
-        "2 children",
-        "3 children ",
-        "more than equal to 3 children",
-      ],
+      categories: ["Yes", "No", "Not sure"],
     },
   };
 
   const series = [
     {
-      name: "Total Children",
+      name: "Ownership of electronics",
       data: [],
     },
   ];
@@ -57,7 +52,7 @@ export default function TotalChildreninHouse() {
 
   series.map((item) => {
     Object.entries(Value).map(([key, value]) => {
-      item.data.push((value/count).toFixed(2));
+      item.data.push((value / count).toFixed(2));
     });
   });
 
@@ -65,7 +60,7 @@ export default function TotalChildreninHouse() {
     <div>
       <Box>
         <Heading fontSize={"1.4rem"} mb={"4%"}>
-            Total children distribution based on data received
+        Child has ownership of electronics or not distribution
         </Heading>
         <Chart options={options} series={series} type="bar" width="600" />
       </Box>

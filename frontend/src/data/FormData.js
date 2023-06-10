@@ -1,33 +1,39 @@
 const FormData = [
   {
+    qno:1,
     question: "Name of child",
     name: "name",
     type: "text",
   },
   {
+    qno:2,
     question: "Age of child",
     name: "age",
-    type: "number",
+    type: "text",
   },
   {
+    qno:3,
     question: "Date of Birth",
     name: "DOB",
     type: "date",
   },
   {
+    qno:4,
     question: "Place of Birth",
     name: "POB",
     type: "text",
   },
   {
+    qno:5,
     question: "Time of Birth",
     name: "TOB",
     type: "time",
   },
   
   {
+    qno:6,
       question: "Gestation",
-      name: "Gestation",
+      name: "gestation",
       type: "singleselect",
       options: [
         "Preterm (before 37 weeks)",
@@ -36,12 +42,14 @@ const FormData = [
       ],
     },
     {
+      qno:7,
       question: "Mode of Delivery",
       name: "deliverymode",
       type: "singleselect",
       options: ["Normal", "C-Section"],
     },
     {
+    qno:8,
       question: "Birth weight",
       name: "birthweight",
       type: "singleselect",
@@ -52,6 +60,7 @@ const FormData = [
       ],
     },
     {
+    qno:9,
       question: "Gender",
       name: "gender",
       type: "singleselect",
@@ -61,6 +70,7 @@ const FormData = [
       ],
     },
     {
+    qno:10,
       question: "Family Type",
       name: "familytype",
       type: "singleselect",
@@ -71,7 +81,8 @@ const FormData = [
       ],
     },
     {
-      question: "Religion",
+    qno:11,
+    question: "Religion",
       name: "religion",
       type: "singleselect",
       options: [
@@ -255,13 +266,12 @@ const FormData = [
         },
       ],
       options: [
-        "No electronic device at home",
         "0 hours",
         "<2 hours",
         "2 to 4 hours",
         "4 to 6 hours",
         "6 to 8 hours",
-        ">8 hours"
+        "more than 8 hours"
       ]
     },
     {
@@ -304,7 +314,7 @@ const FormData = [
         "2 to 4 hours",
         "4 to 6 hours",
         "6 to 8 hours",
-        ">8 hours"
+        "more than 8 hours"
       ]
     },
    
@@ -356,7 +366,7 @@ const FormData = [
         "2 to 4 hours",
         "4 to 6 hours",
         "6 to 8 hours",
-        ">8 hours"
+        "more than 8 hours"
       ]
     },
     {
@@ -380,8 +390,90 @@ const FormData = [
         "2 to 4 hours",
         "4 to 6 hours",
         "6 to 8 hours",
-        ">8 hours"
+        "more than 8 hours"
       ]
+    },
+    {
+      question: "Outdoor physical activity / play of the child per day",
+      name: "outdoorphysicalactivity",
+      type: "singleselect",
+      options: [
+        "No physical activity",
+        "<2 hours",
+        "2 to 4 hours",
+        "4 to 6 hours",
+        "6 to 8 hours",
+        "more than 8 hours"
+      ],
+    },
+    {
+      question: "Do you think it is easy to manage your child when they are given a screen to watch for? For example, screen time help your child to be engaged during your household chores/ helps manage your child better while shopping",
+      name: "isiteasytomanagechildwithscreen",
+      type: "singleselect",
+      options: [
+        "Yes",
+        "No",
+        "Not sure",
+      ],
+    },
+    {
+      question: "Do you think your child's communication skills will enhance watching screen?",
+      name: "communicationskillincreased",
+      type: "singleselect",
+      options: [
+        "Yes",
+        "No",
+        "Not sure",
+      ],
+    },
+    {
+      question: "Do you think increased screen time will slow down child's speech and language development?",
+      name: "slowdownchildspeechandlanguagedevelopment",
+      type: "singleselect",
+      options: [
+        "Yes",
+        "No",
+        "Not sure",
+      ],
+    },
+    {
+      question: "Do you think screentime will enhance your child's social skills such as sharing, waiting for their turn etc ?",
+      name: "increasesocialskills",
+      type: "singleselect",
+      options: [
+        "Yes",
+        "No",
+        "Not sure",
+      ],
+    },
+    {
+      question: "Do you think that increased screen time will lead to attention problems in your child?",
+      name: "attentionprobleminchild",
+      type: "singleselect",
+      options: [
+        "Yes",
+        "No",
+        "Not sure",
+      ],
+    },
+    {
+      question: "Do you think you have to restrict screen time for your children? ",
+      name: "restrictscreentime",
+      type: "singleselect",
+      options: [
+        "Yes",
+        "No",
+        "Not sure",
+      ],
+    },
+    {
+      question: "Does your child has ownership of electronic media / gadgets for their personal use?",
+      name: "ownershipofelectronics",
+      type: "singleselect",
+      options: [
+        "Yes",
+        "No"
+      ],
     },
     
     // {

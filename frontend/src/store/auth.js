@@ -7,7 +7,7 @@ let adminAuthInitials = {
 
 const AdminAuthSlice = createSlice({
     name: "adminauthentication",
-    initialState: adminAuthInitials,
+    initialState: {adminAuthInitials},
     reducers: {
       login(state) {
         state.isAdminAuthenticated = true;
